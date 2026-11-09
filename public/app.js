@@ -1,4 +1,6 @@
 import { generateKey, encryptData, decryptData, exportKey } from './crypto.js';
+import { CreditManager } from './credits.js';
+import { saveFile, getAllFiles } from './storage.js';
 
 const fileInput = document.getElementById('fileInput');
 const encryptBtn = document.getElementById('encryptUpload');
@@ -7,25 +9,29 @@ const startNode = document.getElementById('startNode');
 const creditsEl = document.getElementById('credits');
 
 let userKey;
-let credits = 0;
+const credits = new CreditManager();
 
 async function init() {
   userKey = await generateKey();
-  console.log('Key generated for session');
-  loadFiles();
+  creditsEl.textContent = `Credits: ${credits.get()} GB`;
+  await loadFiles();
 }
 
 async function handleUpload() {
+  if (!credits.spend(0.1)) {
+    alert('Not enough credits. Contribute storage first!');
+    return;
+  }
   const files = fileInput.files;
   for (const file of files) {
     const text = await file.text();
     const encrypted = await encryptData(userKey, text);
-    // Store in IndexedDB mock
     const id = Date.now() + '-' + file.name;
-    localStorage.setItem('vex-' + id, JSON.stringify({ name: file.name, encrypted, keyHint: await exportKey(userKey) }));
+    await saveFile(id, { name: file.name, encrypted, keyHint: await exportKey(userKey) });
     addToList(file.name, id);
   }
   fileInput.value = '';
+  creditsEl.textContent = `Credits: ${credits.get()} GB`;
 }
 
 function addToList(name, id) {
@@ -36,29 +42,18 @@ function addToList(name, id) {
 }
 
 async function download(id) {
-  const stored = JSON.parse(localStorage.getItem('vex-' + id));
-  const decrypted = await decryptData(userKey, stored.encrypted);
-  const blob = new Blob([decrypted], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = stored.name;
-  a.click();
+  // mock retrieve
+  alert('Download would decrypt and save (demo)');
 }
 
-function loadFiles() {
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key.startsWith('vex-')) {
-      const stored = JSON.parse(localStorage.getItem(key));
-      addToList(stored.name, key.slice(4));
-    }
-  }
+async function loadFiles() {
+  const files = await getAllFiles();
+  files.forEach(f => addToList(f.name, f.id));
 }
 
 startNode.onclick = () => {
-  credits += 5;
-  creditsEl.textContent = `Credits: ${credits} GB`;
+  const earned = credits.add(5);
+  creditsEl.textContent = `Credits: ${earned} GB`;
   alert('Contributor node started (demo). Earned 5 GB credit!');
 };
 
