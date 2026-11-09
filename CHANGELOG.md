@@ -4,3 +4,4 @@
 - Initial MVP: client encryption, IndexedDB, credits, node sim
 - Docs, security model, protocol draft
 - Many utility modules
+- Added format, date utils, use cases, node README
