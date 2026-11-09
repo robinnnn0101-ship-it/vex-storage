@@ -11,14 +11,20 @@ Client-side AES-256-GCM. Zero-knowledge. No central provider.
 3. Click "Start Contributor Node" to earn credits
 4. Spend credits to store
 
+## Features (MVP)
+- Client-side encryption
+- Credit system
+- File list with sizes
+- Theme toggle
+- Search filter
+- Usage stats
+- Backup/restore stubs
+
 ## Architecture
 - Client: Web Crypto + IndexedDB
 - Credits: local for demo, P2P later
 - Node: JS simulator
 - Future: WebRTC P2P, Solana incentives
-
-## Status
-MVP live. 30+ commits building the free cloud foundation.
 
 See docs/ for protocol, security, roadmap.
 
