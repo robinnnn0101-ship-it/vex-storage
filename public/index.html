@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vex Storage - Free Decentralized Cloud</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>🔒 Vex Storage</h1>
+      <p>Free, client-encrypted, contribution-based cloud storage</p>
+    </header>
+    <main>
+      <section id="upload">
+        <input type="file" id="fileInput" multiple>
+        <button id="encryptUpload">Encrypt & Store</button>
+      </section>
+      <section id="files">
+        <h2>Your Files</h2>
+        <ul id="fileList"></ul>
+      </section>
+      <section id="contribute">
+        <h2>Contribute Storage</h2>
+        <p>Share spare disk to earn free credits</p>
+        <button id="startNode">Start Contributor Node</button>
+        <div id="credits">Credits: 0 GB</div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
