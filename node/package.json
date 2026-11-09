@@ -1,0 +1,7 @@
+{
+  "name": "vex-storage-node",
+  "version": "0.1.0",
+  "description": "Vex Storage contributor node simulator",
+  "main": "contributor.js",
+  "type": "commonjs"
+}
