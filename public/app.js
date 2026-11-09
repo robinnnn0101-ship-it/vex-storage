@@ -1,6 +1,7 @@
 import { generateKey, encryptData, decryptData, exportKey } from './crypto.js';
 import { CreditManager } from './credits.js';
 import { saveFile, getAllFiles } from './storage.js';
+import { formatBytes } from './utils/format.js';
 
 const fileInput = document.getElementById('fileInput');
 const encryptBtn = document.getElementById('encryptUpload');
@@ -27,28 +28,27 @@ async function handleUpload() {
     const text = await file.text();
     const encrypted = await encryptData(userKey, text);
     const id = Date.now() + '-' + file.name;
-    await saveFile(id, { name: file.name, encrypted, keyHint: await exportKey(userKey) });
-    addToList(file.name, id);
+    await saveFile(id, { name: file.name, size: file.size, encrypted, keyHint: await exportKey(userKey), date: Date.now() });
+    addToList(file.name, id, file.size);
   }
   fileInput.value = '';
   creditsEl.textContent = `Credits: ${credits.get()} GB`;
 }
 
-function addToList(name, id) {
+function addToList(name, id, size) {
   const li = document.createElement('li');
-  li.textContent = name + ' (encrypted)';
+  li.innerHTML = `<strong>${name}</strong> <span style="color:#888">(${formatBytes(size||0)})</span>`;
   li.onclick = () => download(id);
   fileList.appendChild(li);
 }
 
 async function download(id) {
-  // mock retrieve
   alert('Download would decrypt and save (demo)');
 }
 
 async function loadFiles() {
   const files = await getAllFiles();
-  files.forEach(f => addToList(f.name, f.id));
+  files.forEach(f => addToList(f.name, f.id, f.size));
 }
 
 startNode.onclick = () => {
