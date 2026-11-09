@@ -1,6 +1,6 @@
 {
   "appName": "Vex Storage",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "defaultChunkSize": 1048576,
   "creditRatio": 1,
   "maxFreeGB": 100
