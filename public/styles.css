@@ -1,11 +1,13 @@
-body { font-family: system-ui, sans-serif; background: #0a0a0a; color: #eee; margin: 0; padding: 20px; }
+body { font-family: system-ui, sans-serif; background: #0a0a0a; color: #eee; margin: 0; padding: 20px; transition: 0.2s; }
 header { text-align: center; margin-bottom: 2rem; }
-h1 { color: #00ff9d; }
+h1 { color: #00ff9d; margin: 0; }
 section { background: #111; padding: 1rem; margin: 1rem 0; border-radius: 8px; border: 1px solid #333; }
-button { background: #00ff9d; color: #000; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+button { background: #00ff9d; color: #000; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: 600; }
+button:hover { opacity: 0.9; }
 input[type=file] { margin: 10px 0; }
 #fileList { list-style: none; padding: 0; }
-#fileList li { padding: 8px; border-bottom: 1px solid #222; }
+#fileList li { padding: 10px; border-bottom: 1px solid #222; cursor: pointer; }
+#fileList li:hover { background: #1a1a1a; }
 @media (max-width: 600px) {
   body { padding: 10px; }
   button { width: 100%; }
