@@ -1,49 +1,25 @@
-# Vex Storage
+# Vex Storage - Free Decentralized Cloud
 
-**Decentralized contribution-based free storage network - Vex Cloud.**
+**Contribution-based free storage network.**
 
-Users contribute spare disk + bandwidth → get free storage credits. 
-Client-side encryption. No central storage provider.
+Contribute spare disk/bandwidth → get free encrypted storage credits.
+Client-side AES-256-GCM. Zero-knowledge. No central provider.
 
-## Live Demo
-Open `public/index.html` in browser (or serve statically).
+## Quick Start
+1. Open `public/index.html` in any browser
+2. Generate key, upload files (encrypted locally via IndexedDB)
+3. Click "Start Contributor Node" to earn credits
+4. Spend credits to store
 
-## Features
-- Client-side AES-256-GCM encryption (Web Crypto)
-- IndexedDB persistence
-- Credit system (contribute to earn free storage)
-- Contributor node simulator
-- Zero-knowledge design
+## Architecture
+- Client: Web Crypto + IndexedDB
+- Credits: local for demo, P2P later
+- Node: JS simulator
+- Future: WebRTC P2P, Solana incentives
 
 ## Status
-MVP foundation. Expanding to full P2P cloud.
+MVP live. 30+ commits building the free cloud foundation.
 
-## Core Idea
-- Client-side AES-256-GCM encryption
-- Peer nodes contribute storage & bandwidth
-- Shared pool for free usage
-- Solana (optional) for ownership / incentives later
+See docs/ for protocol, security, roadmap.
 
-## Roadmap
-- [x] Client encryption module
-- [x] Local storage + credits
-- [ ] Node contribution protocol
-- [ ] Basic web UI enhancements
-- [ ] P2P or IPFS backend
-- [ ] Solana integration
-
-## Stack
-- Frontend: Vanilla JS + Web Crypto + IndexedDB
-- Encryption: AES-256-GCM
-- Network: Planned WebRTC / IPFS + Solana
-- Node: JS simulator (Rust later)
-
-## Run
-```bash
-# Just open public/index.html
-# Or use any static server
-npx serve public
-```
-
----
-Built for Vexlore ecosystem. Free forever for contributors.
+Built for Vexlore. Free for contributors forever.
